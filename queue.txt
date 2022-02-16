@@ -1,0 +1,129 @@
+Queue using linked list
+
+main**********************
+#include<iostream>
+#include "queue.cpp"
+using namespace std;
+int main()
+{
+queuelink<int> q;
+q.enqueue(10);
+q.enqueue(20);
+q.enqueue(30);
+cout << q.length() << endl;
+for (int i = 0; i <3;i++)
+{
+cout << q.Front() << endl;
+q.dequeue();
+}
+system("pause");
+return 0;
+}
+
+
+headr*********
+#pragma once
+template<class T>
+class Node
+{
+public:
+T data;
+Node<T> *next;
+Node();
+Node(T value);
+};
+template<class T>
+class queuelink
+{
+Node<T>*head;
+Node<T>*tail;
+int size;
+public:
+queuelink();
+int length();
+bool empty();
+T Front();
+void enqueue(T value);
+void dequeue();
+};
+
+cpp********************
+
+#include"Header.h"
+#include<assert.h>
+template<class T>
+Node<T>::Node()
+{
+next = 0;
+data = 0;
+}
+template<class T>
+Node<T>::Node(T value)
+{
+next = 0;
+data = value;
+}
+template<class T>
+queuelink<T>::queuelink()
+{
+head = tail = 0;
+size = 0;
+}
+template<class T>
+int queuelink<T>::length()
+{
+return size;
+}
+template<class T>
+bool queuelink<T>::empty()
+{
+return size == 0;
+}
+template<class T>
+T queuelink<T>::Front()
+{
+assert(size != 0);
+return head->data;
+}
+template<class T>
+void queuelink<T>::enqueue(T value)
+{
+Node<T> *tmp = new Node<T>(value);
+if (head == NULL)
+{
+head = tail = tmp;
+}
+else
+{
+tail->next = tmp;
+tail = tmp;//tail=tail->next
+}
+size++;
+}
+template<class T>
+void queuelink<T>::dequeue()
+{
+assert(size != 0);
+Node<T>*del = head;
+head = head->next;
+delete del;
+size--;
+}
+
+Expand queue :-
+{
+
+Int * newarr=new int [size*2];
+Int index=front;
+For (int i =0;i <count; i ++)
+{
+Newarr [i]=arr [index ];
+Index =(index +1)%size;
+}
+Front =0;
+Back =count -1;
+Size*=2;
+Delete arr;
+Arr=newarr;
+}
+************************************************************************
